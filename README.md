@@ -5,12 +5,14 @@
 ## Tech We Used
 
 - ReactJs
-- Firebase Hosting
+- Hosting on Azure
 - Firebase Auth
 - Firebase Storage
 - React-Dom
 - React Redux
 - Stripe payment
+- Paypal payment
+- Crypto payment
 
 ## Features
 
