@@ -9,13 +9,18 @@ import { getBasketTotal } from "./reducer";
 import axios from './axios';
 import { db } from "./firebase";
 
+import PaypalCheckoutButton from "./paypal/PaypalCheckoutButton";
+
 function Payment() {
+    
+
     const [{ basket, user }, dispatch] = useStateValue();
     const history = useHistory();
 
     const stripe = useStripe();
     const elements = useElements();
 
+    const [ordertotal, setordertotal] = useState("");
     const [succeeded, setSucceeded] = useState(false);
     const [processing, setProcessing] = useState("");
     const [error, setError] = useState(null);
@@ -82,6 +87,11 @@ function Payment() {
         setError(event.error ? event.error.message : "");
     }
 
+    const product = {
+        description: "Order Total",
+        price: getBasketTotal(basket),
+    };
+
     return (
         <div className='payment'>
             <div className='payment__container'>
@@ -99,8 +109,8 @@ function Payment() {
                     </div>
                     <div className='payment__address'>
                         <p>{user?.email}</p>
-                        <p>123 React Lane</p>
-                        <p>Los Angeles, CA</p>
+                        <p>206, Mia Appartments</p>
+                        <p>Pune, MH</p>
                     </div>
                 </div>
 
@@ -148,6 +158,23 @@ function Payment() {
                                     <button disabled={processing || disabled || succeeded}>
                                         <span>{processing ? <p>Processing</p> : "Buy Now"}</span>
                                     </button>
+                                <button disabled={processing || disabled || succeeded}>
+                                    <span><div>
+                                        <a 
+                                        // class="donate-with-crypto"
+                                            href="https://commerce.coinbase.com/checkout/3df0868c-f277-4002-a817-12124c21ca28">
+                                            Pay with Crypto
+                                        </a>
+                                        <script src="https://commerce.coinbase.com/v1/checkout.js?version=201807">
+                                        </script>
+                                    </div></span>
+                                </button>
+                                    
+                                </div>
+                                
+                                {/* PAYPAL IMPLEMENTATION */}
+                                <div style={{ marginTop: '13px' }}>
+                                    <PaypalCheckoutButton product={product} />
                                 </div>
 
                                   {/* Errors */}

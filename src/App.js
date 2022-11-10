@@ -12,6 +12,8 @@ import { useStateValue } from "./StateProvider";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 
+import {PayPalScriptProvider} from "@paypal/react-paypal-js";
+
 const promise = loadStripe(
   "pk_test_51HPvU9DFg5koCdLGJJbNo60QAU99BejacsvnKvT8xnCu1wFLCuQP3WBArscK3RvSQmSIB3N0Pbsc7TtbQiJ1vaOi00X9sIbazL"
 );
@@ -43,6 +45,9 @@ function App() {
   }, []);
 
   return (
+    <PayPalScriptProvider
+      options={{"client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID}}
+    >
     <Router>
       <div className="app">
         <Switch>
@@ -70,6 +75,7 @@ function App() {
         </Switch>
       </div>
     </Router>
+    </PayPalScriptProvider>
   );
 }
 
