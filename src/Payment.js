@@ -163,7 +163,7 @@ function Payment() {
                                         <a 
                                         // class="donate-with-crypto"
                                             href="https://commerce.coinbase.com/checkout/3df0868c-f277-4002-a817-12124c21ca28">
-                                            Pay with Crypto
+                                            <b>Pay with Crypto</b>
                                         </a>
                                         <script src="https://commerce.coinbase.com/v1/checkout.js?version=201807">
                                         </script>
